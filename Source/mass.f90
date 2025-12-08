@@ -448,7 +448,10 @@ CASE(.TRUE.) PREDICTOR_STEP
                RHS = - DEL_RHO_D_DEL_Z__0(I,J,K,N) &
                    + (FX(I,J,K,N)*UU(I,J,K)*R(I) - FX(I-1,J,K,N)*UU(I-1,J,K)*R(I-1))*RDX(I)*RRN(I) &
                    + (FY(I,J,K,N)*VV(I,J,K)      - FY(I,J-1,K,N)*VV(I,J-1,K)       )*RDY(J)        &
-                   + (FZ(I,J,K,N)*WW(I,J,K)      - FZ(I,J,K-1,N)*WW(I,J,K-1)       )*RDZ(K)
+                   + (FZ(I,J,K,N)*WW(I,J,K)      - FZ(I,J,K-1,N)*WW(I,J,K-1)       )*RDZ(K)        &
+                   + (D(I,J,K) - ((R(I)*UU(I,J,K) - R(I-1)*UU(I-1,J,K))*RRN(I)*RDX(I)              &
+                                     + (VV(I,J,K) -        VV(I,J-1,K))*RDY(J)                     &
+                                     + (WW(I,J,K) -        WW(I,J,K-1))*RDZ(K)))*RHO(I,J,K)*ZZ(I,J,K,N)
                ZZS(I,J,K,N) = RHO(I,J,K)*ZZ(I,J,K,N) - DT*RHS
             ENDDO
          ENDDO
@@ -625,7 +628,10 @@ CASE(.FALSE.) PREDICTOR_STEP  ! CORRECTOR step
                RHS = - DEL_RHO_D_DEL_Z(I,J,K,N) &
                    + (FX(I,J,K,N)*UU(I,J,K)*R(I) - FX(I-1,J,K,N)*UU(I-1,J,K)*R(I-1))*RDX(I)*RRN(I) &
                    + (FY(I,J,K,N)*VV(I,J,K)      - FY(I,J-1,K,N)*VV(I,J-1,K)       )*RDY(J)        &
-                   + (FZ(I,J,K,N)*WW(I,J,K)      - FZ(I,J,K-1,N)*WW(I,J,K-1)       )*RDZ(K)
+                   + (FZ(I,J,K,N)*WW(I,J,K)      - FZ(I,J,K-1,N)*WW(I,J,K-1)       )*RDZ(K)        &
+                   + (DS(I,J,K) - ((R(I)*UU(I,J,K) - R(I-1)*UU(I-1,J,K))*RRN(I)*RDX(I)             &
+                                      + (VV(I,J,K) -        VV(I,J-1,K))*RDY(J)                    &
+                                      + (WW(I,J,K) -        WW(I,J,K-1))*RDZ(K)))*RHOS(I,J,K)*ZZS(I,J,K,N)
                ZZ(I,J,K,N) = .5_EB*( RHO(I,J,K)*ZZ(I,J,K,N) + RHOS(I,J,K)*ZZS(I,J,K,N) - DT*RHS )
             ENDDO
          ENDDO

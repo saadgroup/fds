@@ -195,6 +195,7 @@ LOGICAL :: SUPPRESSION=.TRUE.               !< Indicates if gas-phase combustion
 LOGICAL :: ACCUMULATE_WATER=.FALSE.         !< Indicates that integrated liquid outputs are specified
 LOGICAL :: WRITE_XYZ=.FALSE.                !< Indicates that a Plot3D geometry file is specified by user
 LOGICAL :: CHECK_POISSON=.FALSE.            !< Check the accuracy of the Poisson solver
+LOGICAL :: SOLVE_PREDICTOR_PRESSURE=.FALSE. !< Flag indicating if pressure solve is needed at predictor stage
 LOGICAL :: WRITE_PARCSRPCG_MATRIX=.FALSE.   !< If true, write out matrix for UGLMAT HYPRE solver
 LOGICAL :: TWO_D=.FALSE.                    !< Perform a 2-D simulation
 LOGICAL :: SETUP_ONLY=.FALSE.               !< Indicates that the calculation should be stopped before time-stepping
